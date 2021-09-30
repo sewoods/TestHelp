@@ -11,11 +11,11 @@
 
 			socket.onclose = function() {
 				console.error("web channel closed");
-			}
+			};
 
 			socket.onerror = function(error) {
 				console.error("web channel error: " + error);
-			}
+			};
 			
 			socket.onopen = function() 
 			{
@@ -23,13 +23,13 @@
 					backend = channel.objects.backend;
 
 					document.getElementById("showMePeep").onclick = function() {
-						var messageToSend = "ShowPeep";
-						backend.changeText(messageToSend);
+						
+						backend.changeText("ShowPeep");
 					}
 
 					backend.changeText("Client connected, ready to receive messages!");
 				});
-			}
+			};
 		}
 	
 	</script>
@@ -41,7 +41,7 @@
 	<li>Adequate peak flow</li>
 	<li>Adequate tidal volume</li>
 	<li>Adequate inspiratory time</li>
-	<li>Adequate PEEP (COPD) <input type="button" id="showMePeep" onclick="javascript:click();" value="Show Me"/></li>
+	<li>Adequate PEEP (COPD) <input type="button" id="showMePeep" onclick="javascript:click();" value="Show Me!"/></li>
 	<li>Adequate ESENS</li>
 </ul>
 <a href="HighCircuitPressure.html">Back</a>
