@@ -8,6 +8,14 @@
 		window.onload = function() 
 		{
 			var socket = new WebSocket("ws://localhost:12345");
+
+			socket.onclose = function() {
+				console.error("web channel closed");
+			}
+
+			socket.onerror = function(error) {
+				console.error("web channel error: " + error);
+			}
 			
 			socket.onopen = function() 
 			{
@@ -18,6 +26,8 @@
 						var messageToSend = "ShowPeep";
 						backend.changeText(messageToSend);
 					}
+
+					backend.changeText("Client connected, ready to receive messages!");
 				}
 			}
 		}
