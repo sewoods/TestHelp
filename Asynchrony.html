@@ -3,10 +3,11 @@
 	<link rel="stylesheet" href="teststyle.css">
 	<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
 	<script type="text/javascript">
-		var backend;
+		var olympusgui;
 		
 		window.onload = function() 
 		{
+			<!--- We'll need to work on making access to this more secure --->
 			var socket = new WebSocket("ws://localhost:12345");
 
 			socket.onclose = function() {
@@ -20,14 +21,22 @@
 			socket.onopen = function() 
 			{
 				new QWebChannel(socket, function(channel) {
-					backend = channel.objects.backend;
+					olympusgui = channel.objects.olympusgui;
 
-					document.getElementById("showMePeep").onclick = function() {
-						
-						backend.changeText("ShowPeep");
+					<!--- A property of the GUI visible to HTML --->
+					var visibleProperty = olympusgui.someProperty;
+
+					<!--- Send a message to the Gui when show me button clicked --->
+					document.getElementById("showMePeep").onclick = function() {						
+						olympusgui.changeText("ShowPeep");
 					}
 
-					backend.changeText("Client connected, ready to receive messages!");
+					<!--- Receive a message from the Gui. (Doesn't do anything right now) --->
+					olympusgui.someSignal.connect(function(textFromGui) {});
+
+					<!--- Send message on load that connected --->
+					olympusgui.changeText("Client connected, ready to receive messages!");
+					
 				});
 			};
 		}
