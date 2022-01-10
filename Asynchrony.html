@@ -28,14 +28,14 @@
 
 					<!--- Send a message to the Gui when show me button clicked --->
 					document.getElementById("showMePeep").onclick = function() {						
-						olympusgui.changeText("ShowPeep");
+						olympusgui.sendCommand("ShowPeep");
 					}
 
 					<!--- Receive a message from the Gui. (Doesn't do anything right now) --->
 					olympusgui.someSignal.connect(function(textFromGui) {});
 
 					<!--- Send message on load that connected --->
-					olympusgui.changeText("Client connected, ready to receive messages!");
+					olympusgui.sendCommand("Client connected, ready to receive messages!");
 					
 				});
 			};
