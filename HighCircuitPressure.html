@@ -1,67 +1,23 @@
 <!DOCTYPE html>
-<!-- saved from url=(0059)https://sewoods.github.io/TestHelp/HighCircuitPressure.html -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" href="teststyle.css">
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-	<script type="text/javascript">
-		var olympusgui;
-		
-		window.onload = function() 
-		{
-			<!--- We'll need to work on making access to this more secure --->
-			var socket = new WebSocket("ws://localhost:12345");
-
-			socket.onclose = function() {
-				console.error("web channel closed");
-			};
-
-			socket.onerror = function(error) {
-				console.error("web channel error: " + error);
-			};
-			
-			socket.onopen = function() 
-			{
-				new QWebChannel(socket, function(channel) {
-					olympusgui = channel.objects.olympusgui;
-
-					<!--- A property of the GUI visible to HTML --->
-					var visibleProperty = olympusgui.someProperty;
-
-					<!--- Send a message to the Gui when show me button clicked --->
-					document.getElementById("showMeAlarmSettings").onclick = function() {						
-						olympusgui.sendCommand("ShowAlarmSettings");
-					}
-
-					<!--- Receive a message from the Gui. (Doesn't do anything right now) --->
-					olympusgui.someSignal.connect(function(textFromGui) {});
-
-					<!--- Send message on load that connected --->
-					olympusgui.sendCommand("Client connected, ready to receive messages!");
-					
-				});
-			};
-		}
-	
-	</script>
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="teststyle.css">
+<script type="text/javascript" src="qwebchannel.js"></script>
+<script type="text/javascript" src="notifyqtapp.js"></script>
 </head>
 
 <body>
-<p><input type="button" id="showMeAlarmSettings" onclick="javascript:click();" value="Adjust Alarm Settings"/></p>
-
+<p><input type="button" id="ShowAlarmSettings" value="Adjust Alarm Settings"/></p>
 <p>Potential Causes:</p>
-
 <ol type="1">
-	<li><a href="https://sewoods.github.io/TestHelp/Suctioning.html">Patient is coughing or Increased resistance</a></li>
-	<li><a href="https://sewoods.github.io/TestHelp/DecreasedCompliance.html">Decreased compliance</a></li>
-	<li><a href="https://sewoods.github.io/TestHelp/IncreasedIntrinsicPEEP.html">Increased Intrinsic PEEP</a></li>
-	<li><a href="https://sewoods.github.io/TestHelp/Asynchrony.html">Ventilator Asynchrony</a></li>
+        <li><a href="Suctioning.html">Patient is coughing or Increased resistance</a></li>
+        <li><a href="DecreasedCompliance.html">Decreased compliance</a></li>
+        <li><a href="IncreasedIntrinsicPEEP.html">Increased Intrinsic PEEP</a></li>
+        <li><a href="Asynchrony.html">Ventilator Asynchrony</a></li>
 </ol>
-<video width="300" height="220" controls="">
+<video width="300" height="220" controls>
         <source src="C0007-1.webm" type="video/webm">
-	<source src="C0007-1.m4v" type="video/mp4">
+        <source src="C0007-1.m4v" type="video/mp4">
 Your browser does not support the video tag.
 </video>
-
-
-</body></html>
+</body>
+</html>
